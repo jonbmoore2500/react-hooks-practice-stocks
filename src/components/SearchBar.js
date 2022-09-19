@@ -2,12 +2,14 @@ import React, {useState} from "react";
 
 function SearchBar({handleFilter, handleSort}) {
   const [alphaChecked, setAlphaChecked] = useState(true)
+  const [priceChecked, setPriceChecked] = useState(false)
   function onChangeFilter(e) {
     handleFilter(e.target.value)
   }
   
   function onChangeSort(e) {
-    
+    setAlphaChecked(!alphaChecked)
+    setPriceChecked(!priceChecked)
     handleSort(e.target.value)
   }
 
@@ -20,7 +22,7 @@ function SearchBar({handleFilter, handleSort}) {
           type="radio"
           value="Alphabetically"
           name="sort"
-          checked={null}
+          checked={alphaChecked}
           onChange={onChangeSort}
         />
         Alphabetically
@@ -30,7 +32,7 @@ function SearchBar({handleFilter, handleSort}) {
           type="radio"
           value="Price"
           name="sort"
-          checked={null}
+          checked={priceChecked}
           onChange={onChangeSort}
         />
         Price
