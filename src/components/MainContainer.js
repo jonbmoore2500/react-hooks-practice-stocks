@@ -15,16 +15,24 @@ function MainContainer() {
       setStocksDisp(data)
     })
   }, [])
+
+  function handlePurchaseClick(purchaseObj) {
+    if (stocksPurchased.some((stock) => stock === purchaseObj) === true) {
+      return
+    } else {
+      setStocksPurchased([...stocksPurchased, purchaseObj])
+    }    
+  }
   
   return (
     <div>
       <SearchBar />
       <div className="row">
         <div className="col-8">
-          <StockContainer stocksToDisplay={stocksDisp}/>
+          <StockContainer stocksToDisplay={stocksDisp} handlePurchaseClick={handlePurchaseClick}/>
         </div>
         <div className="col-4">
-          <PortfolioContainer stocksPurchased={stocksPurchased}/>
+          <PortfolioContainer portfolioStocks={stocksPurchased}/>
         </div>
       </div>
     </div>
