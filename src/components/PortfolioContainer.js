@@ -1,9 +1,9 @@
 import React from "react";
 import Stock from "./Stock";
 
-function PortfolioContainer({portfolioStocks}) {
-  function onSellClick(sellId) {
-    console.log('you sold this stock', sellId)
+function PortfolioContainer({portfolioStocks, handleSellClick}) {
+  function onSellClick(sellObj) {
+    handleSellClick(sellObj.id)
   }
   
   return (

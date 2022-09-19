@@ -23,6 +23,10 @@ function MainContainer() {
       setStocksPurchased([...stocksPurchased, purchaseObj])
     }    
   }
+  function handleSellClick(sellId) {
+    const newPurchasedArr = stocksPurchased.filter((stock) => stock.id !== sellId)
+    setStocksPurchased(newPurchasedArr)
+  }
   
   return (
     <div>
@@ -32,7 +36,7 @@ function MainContainer() {
           <StockContainer stocksToDisplay={stocksDisp} handlePurchaseClick={handlePurchaseClick}/>
         </div>
         <div className="col-4">
-          <PortfolioContainer portfolioStocks={stocksPurchased}/>
+          <PortfolioContainer portfolioStocks={stocksPurchased} handleSellClick={handleSellClick}/>
         </div>
       </div>
     </div>
