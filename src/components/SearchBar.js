@@ -1,11 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 
 function SearchBar({handleFilter, handleSort}) {
-  
+  const [alphaChecked, setAlphaChecked] = useState(true)
   function onChangeFilter(e) {
     handleFilter(e.target.value)
   }
   
+  function onChangeSort(e) {
+    
+    handleSort(e.target.value)
+  }
+
+
   return (
     <div>
       <strong>Sort by:</strong>
@@ -15,7 +21,7 @@ function SearchBar({handleFilter, handleSort}) {
           value="Alphabetically"
           name="sort"
           checked={null}
-          onChange={null}
+          onChange={onChangeSort}
         />
         Alphabetically
       </label>
@@ -25,7 +31,7 @@ function SearchBar({handleFilter, handleSort}) {
           value="Price"
           name="sort"
           checked={null}
-          onChange={null}
+          onChange={onChangeSort}
         />
         Price
       </label>

@@ -4,14 +4,16 @@ import PortfolioContainer from "./PortfolioContainer";
 import SearchBar from "./SearchBar";
 
 function MainContainer() {
-  const [stocksMain, setStocksMain] = useState([])
+  // const [stocksMain, setStocksMain] = useState([])
   const [stocksDisp, setStocksDisp] = useState([])
   const [stocksPurchased, setStocksPurchased] = useState([])
+  const [sortVal, setSortVal] = useState('Alphabetically')
+  const [filterType, setFilterType] = useState('Tech')
   useEffect(() => {
     fetch('http://localhost:3001/stocks')
     .then(r => r.json())
     .then(data => {
-      setStocksMain(data)
+      // setStocksMain(data)
       setStocksDisp(data)
     })
   }, [])
@@ -28,22 +30,54 @@ function MainContainer() {
     setStocksPurchased(newPurchasedArr)
   }
   
-  function handleFilter(filterType) {
-    console.log(filterType)
-    const filteredStocks = stocksMain.filter((stock) => stock.type === filterType)
-    setStocksDisp(filteredStocks)
-  }
-  function handleSort() {
-    console.log('handleSort')
-  }
+  
+  const filteredStocks = stocksDisp.filter((stock) => stock.type === filterType)
+
+  const sortedArr = filteredStocks.sort((a, b) => {
+    if (sortVal === "Alphabetically") {
+      const tickerA = a.ticker;
+      const tickerB = b.ticker;
+      if (tickerA < tickerB) {
+        return -1
+      } else {
+        return 1
+      }
+    } else {
+      return a.price - b.price
+    }
+  })
+  // function handleFilter(filterType) {
+  //   console.log(filterType)
+  //   const filteredStocks = stocksMain.filter((stock) => stock.type === filterType)
+  //   setStocksDisp(filteredStocks)
+  // }
+  // function handleSort(sortValue) {
+  //   // console.log(sortValue)
+  //   let sortedArr = []
+  //   if (sortValue === "Alphabetically") {
+  //     sortedArr = stocksDisp.sort((a, b) => {
+  //       const tickerA = a.ticker;
+  //       const tickerB = b.ticker;
+  //       if (tickerA < tickerB) {
+  //         return -1
+  //       } else {
+  //         return 1
+  //       }
+  //     })
+  //   } else {
+  //     sortedArr = stocksDisp.sort((a, b) => a.price - b.price)
+  //   }
+  //   console.log(sortedArr)
+  //   setStocksDisp(sortedArr)
+  // }
 
 
   return (
     <div>
-      <SearchBar handleFilter={handleFilter} handleSort={handleSort}/>
+      <SearchBar handleFilter={setFilterType} handleSort={setSortVal}/>
       <div className="row">
         <div className="col-8">
-          <StockContainer stocksToDisplay={stocksDisp} handlePurchaseClick={handlePurchaseClick}/>
+          <StockContainer stocksToDisplay={sortedArr} handlePurchaseClick={handlePurchaseClick}/>
         </div>
         <div className="col-4">
           <PortfolioContainer portfolioStocks={stocksPurchased} handleSellClick={handleSellClick}/>
