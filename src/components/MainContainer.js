@@ -30,9 +30,7 @@ function MainContainer() {
     setStocksPurchased(newPurchasedArr)
   }
   
-  
   const filteredStocks = stocksDisp.filter((stock) => stock.type === filterType)
-
   const sortedArr = filteredStocks.sort((a, b) => {
     if (sortVal === "Alphabetically") {
       const tickerA = a.ticker;
@@ -46,31 +44,6 @@ function MainContainer() {
       return a.price - b.price
     }
   })
-  // function handleFilter(filterType) {
-  //   console.log(filterType)
-  //   const filteredStocks = stocksMain.filter((stock) => stock.type === filterType)
-  //   setStocksDisp(filteredStocks)
-  // }
-  // function handleSort(sortValue) {
-  //   // console.log(sortValue)
-  //   let sortedArr = []
-  //   if (sortValue === "Alphabetically") {
-  //     sortedArr = stocksDisp.sort((a, b) => {
-  //       const tickerA = a.ticker;
-  //       const tickerB = b.ticker;
-  //       if (tickerA < tickerB) {
-  //         return -1
-  //       } else {
-  //         return 1
-  //       }
-  //     })
-  //   } else {
-  //     sortedArr = stocksDisp.sort((a, b) => a.price - b.price)
-  //   }
-  //   console.log(sortedArr)
-  //   setStocksDisp(sortedArr)
-  // }
-
 
   return (
     <div>
