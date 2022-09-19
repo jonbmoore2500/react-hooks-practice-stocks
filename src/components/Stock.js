@@ -1,7 +1,7 @@
 import React from "react";
 
 function Stock({stockObj, onStockClick}) {
-  const {id, name, price} = stockObj
+  const {name, price} = stockObj
   
   
   return (

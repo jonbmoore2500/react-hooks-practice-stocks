@@ -28,9 +28,19 @@ function MainContainer() {
     setStocksPurchased(newPurchasedArr)
   }
   
+  function handleFilter(filterType) {
+    console.log(filterType)
+    const filteredStocks = stocksMain.filter((stock) => stock.type === filterType)
+    setStocksDisp(filteredStocks)
+  }
+  function handleSort() {
+    console.log('handleSort')
+  }
+
+
   return (
     <div>
-      <SearchBar />
+      <SearchBar handleFilter={handleFilter} handleSort={handleSort}/>
       <div className="row">
         <div className="col-8">
           <StockContainer stocksToDisplay={stocksDisp} handlePurchaseClick={handlePurchaseClick}/>
