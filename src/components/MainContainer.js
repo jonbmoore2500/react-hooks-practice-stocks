@@ -8,7 +8,7 @@ function MainContainer() {
   const [stocksDisp, setStocksDisp] = useState([])
   const [stocksPurchased, setStocksPurchased] = useState([])
   const [sortVal, setSortVal] = useState('Alphabetically')
-  const [filterType, setFilterType] = useState('Tech')
+  const [filterType, setFilterType] = useState('All')
   useEffect(() => {
     fetch('http://localhost:3001/stocks')
     .then(r => r.json())
@@ -30,7 +30,17 @@ function MainContainer() {
     setStocksPurchased(newPurchasedArr)
   }
   
-  const filteredStocks = stocksDisp.filter((stock) => stock.type === filterType)
+  let filteredStocks = [...stocksDisp]
+  if (filterType !== "All") {
+    filteredStocks = stocksDisp.filter((stock) => stock.type === filterType)
+  }
+  // const filteredStocks = stocksDisp.filter((stock) => {
+  //   if (filterType !== "All") {
+  //     stock.type === filterType
+  //   } else {
+  //     return true
+  //   }
+  // })
   const sortedArr = filteredStocks.sort((a, b) => {
     if (sortVal === "Alphabetically") {
       const tickerA = a.ticker;

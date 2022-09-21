@@ -41,6 +41,7 @@ function SearchBar({handleFilter, handleSort}) {
       <label>
         <strong>Filter:</strong>
         <select onChange={onChangeFilter}>
+          <option value="All">All</option>
           <option value="Tech">Tech</option>
           <option value="Sportswear">Sportswear</option>
           <option value="Finance">Finance</option>
